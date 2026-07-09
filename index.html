@@ -3,40 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Entrenador de Estadística</title>
+    <title>Examen Interactivo de Estadística</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <main class="container">
-      <header>
-        <h1>Entrenador de Estadística</h1>
-        <p>
-          Práctica basada en los temas de los notebooks, evaluaciones y parciales,
-          con foco automático en tus errores.
+  <body class="min-h-screen bg-slate-100 text-slate-800">
+    <main class="mx-auto max-w-6xl p-4 md:p-6">
+      <header class="rounded-2xl bg-gradient-to-r from-indigo-600 via-sky-600 to-emerald-600 p-6 text-white shadow-lg">
+        <h1 class="text-2xl font-bold md:text-3xl">Examen Interactivo de Estadística</h1>
+        <p class="mt-2 max-w-3xl text-sm md:text-base">
+          Entrenamiento intensivo basado en notebooks y parciales: análisis de gráficos
+          (torta, barras, histograma, dispersión, boxplot), análisis y completado de tablas,
+          con refuerzo automático de errores.
         </p>
       </header>
 
-      <section class="panel stats">
-        <div><strong>Preguntas:</strong> <span id="total">0</span></div>
-        <div><strong>Correctas:</strong> <span id="correct">0</span></div>
-        <div><strong>Precisión:</strong> <span id="accuracy">0%</span></div>
-        <button id="focus-toggle" type="button">Modo enfoque: OFF</button>
+      <section class="mt-4 grid gap-4 lg:grid-cols-3">
+        <article class="rounded-xl bg-white p-4 shadow-sm">
+          <p class="text-xs uppercase tracking-wide text-slate-500">Preguntas totales</p>
+          <p id="total" class="text-2xl font-bold">0</p>
+        </article>
+        <article class="rounded-xl bg-white p-4 shadow-sm">
+          <p class="text-xs uppercase tracking-wide text-slate-500">Correctas</p>
+          <p id="correct" class="text-2xl font-bold">0</p>
+        </article>
+        <article class="rounded-xl bg-white p-4 shadow-sm">
+          <p class="text-xs uppercase tracking-wide text-slate-500">Precisión global</p>
+          <p id="accuracy" class="text-2xl font-bold">0%</p>
+        </article>
       </section>
 
-      <section class="panel">
-        <h2 id="topic"></h2>
-        <p id="question"></p>
-        <form id="answer-form">
-          <div id="answer-area"></div>
-          <button type="submit">Responder</button>
-        </form>
-        <p id="feedback"></p>
-        <button id="next-btn" type="button">Siguiente ejercicio</button>
+      <section class="mt-4 rounded-2xl bg-white p-4 shadow-sm">
+        <div class="flex flex-wrap items-end gap-3">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500" for="exam-size">Preguntas del examen</label>
+            <select id="exam-size" class="mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm">
+              <option value="15">15</option>
+              <option value="20" selected>20</option>
+              <option value="30">30</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-slate-500" for="exam-time">Tiempo (minutos)</label>
+            <select id="exam-time" class="mt-1 rounded-lg border border-slate-300 px-3 py-2 text-sm">
+              <option value="30" selected>30</option>
+              <option value="45">45</option>
+              <option value="60">60</option>
+            </select>
+          </div>
+          <button id="start-exam-btn" type="button" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+            Iniciar examen
+          </button>
+          <button id="finish-exam-btn" type="button" class="rounded-lg bg-rose-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rose-700">
+            Finalizar examen
+          </button>
+          <button id="focus-toggle" type="button" class="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700">
+            Modo enfoque: OFF
+          </button>
+        </div>
+
+        <div class="mt-4">
+          <div class="mb-1 flex justify-between text-sm text-slate-600">
+            <span id="exam-progress-label">Examen no iniciado</span>
+            <span id="timer-label">00:00</span>
+          </div>
+          <div class="h-3 overflow-hidden rounded-full bg-slate-200">
+            <div id="exam-progress-bar" class="h-full w-0 bg-indigo-600 transition-all"></div>
+          </div>
+        </div>
       </section>
 
-      <section class="panel">
-        <h3>Temas donde más fallás</h3>
-        <ul id="weak-topics"></ul>
+      <section class="mt-4 grid gap-4 xl:grid-cols-3">
+        <article class="rounded-2xl bg-white p-5 shadow-sm xl:col-span-2">
+          <p id="topic" class="text-sm font-semibold uppercase tracking-wide text-indigo-600"></p>
+          <h2 id="question" class="mt-2 text-lg font-semibold"></h2>
+          <div id="visual-area" class="mt-4 rounded-xl border border-slate-200 p-4"></div>
+
+          <form id="answer-form" class="mt-4 space-y-3">
+            <div id="answer-area"></div>
+            <div class="flex gap-2">
+              <button id="submit-btn" type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700">
+                Responder
+              </button>
+              <button id="next-btn" type="button" class="rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700">
+                Siguiente ejercicio
+              </button>
+            </div>
+          </form>
+          <p id="feedback" class="mt-3 text-sm font-semibold"></p>
+        </article>
+
+        <article class="rounded-2xl bg-white p-5 shadow-sm">
+          <h3 class="text-base font-bold">Temas donde más fallás</h3>
+          <ul id="weak-topics" class="mt-2 space-y-2 text-sm"></ul>
+          <div id="result-box" class="mt-5 rounded-xl border border-dashed border-slate-300 p-3 text-sm text-slate-600">
+            Al finalizar un examen vas a ver acá tu resultado detallado.
+          </div>
+        </article>
       </section>
     </main>
     <script src="./app.js"></script>
