@@ -1,3 +1,70 @@
-#visual-area table {
+.question-card {
+  border: 1px solid rgb(226 232 240);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: white;
+}
+
+.choice-option {
+  border: 1px solid rgb(203 213 225);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.choice-option.correct {
+  border-color: rgb(22 163 74);
+  background: rgb(240 253 244);
+}
+
+.choice-option.incorrect {
+  border-color: rgb(220 38 38);
+  background: rgb(254 242 242);
+}
+
+.feedback {
+  margin-top: 0.85rem;
+  font-size: 0.875rem;
+  padding: 0.7rem;
+  border-radius: 0.65rem;
+}
+
+.feedback.ok {
+  background: rgb(240 253 244);
+  color: rgb(21 128 61);
+  border: 1px solid rgb(134 239 172);
+}
+
+.feedback.bad {
+  background: rgb(254 242 242);
+  color: rgb(185 28 28);
+  border: 1px solid rgb(252 165 165);
+}
+
+.chart-box {
+  border: 1px solid rgb(226 232 240);
+  border-radius: 0.85rem;
+  padding: 0.9rem;
+  background: rgb(248 250 252);
+}
+
+.table-clean {
   border-collapse: collapse;
+  width: 100%;
+  font-size: 0.88rem;
+}
+
+.table-clean th,
+.table-clean td {
+  border: 1px solid rgb(203 213 225);
+  padding: 0.4rem 0.55rem;
+  text-align: center;
+}
+
+.boxplot-option {
+  display: block;
+  width: 180px;
+  height: 30px;
 }
