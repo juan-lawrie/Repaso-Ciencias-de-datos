@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Entrenador de Estadística</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Entrenador de Estadística</h1>
+        <p>
+          Práctica basada en los temas de los notebooks, evaluaciones y parciales,
+          con foco automático en tus errores.
+        </p>
+      </header>
+
+      <section class="panel stats">
+        <div><strong>Preguntas:</strong> <span id="total">0</span></div>
+        <div><strong>Correctas:</strong> <span id="correct">0</span></div>
+        <div><strong>Precisión:</strong> <span id="accuracy">0%</span></div>
+        <button id="focus-toggle" type="button">Modo enfoque: OFF</button>
+      </section>
+
+      <section class="panel">
+        <h2 id="topic"></h2>
+        <p id="question"></p>
+        <form id="answer-form">
+          <div id="answer-area"></div>
+          <button type="submit">Responder</button>
+        </form>
+        <p id="feedback"></p>
+        <button id="next-btn" type="button">Siguiente ejercicio</button>
+      </section>
+
+      <section class="panel">
+        <h3>Temas donde más fallás</h3>
+        <ul id="weak-topics"></ul>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
